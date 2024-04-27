@@ -4,9 +4,8 @@ import { useRouter } from 'next/router'
 import { siteConfig } from '@/lib/config'
 import { checkContainHttp, sliceUrlFromHttp } from '@/lib/utils'
 
-// 管理blog列表页面
+// 管理blog列表页面 添加日期处理
 const BlogPostCard = ({ post, className }) => {
-  console.log( post.date.start_date)
   const router = useRouter()
   const currentSelected = router.asPath.split('?')[0] === '/' + post.slug
   let pageIcon = post.pageIcon !== '' ? post.pageIcon : siteConfig('IMG_LAZY_LOAD_PLACEHOLDER')
