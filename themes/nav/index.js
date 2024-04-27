@@ -262,8 +262,8 @@ const LayoutSlug = (props) => {
 
                   {/* title */}
                   <h1 className="text-3xl pt-4 md:pt-12 dark:text-gray-300">{siteConfig('POST_TITLE_ICON') && <NotionIcon icon={post?.pageIcon} />}{post?.title}</h1>
-                  <h2 className="text-base pl-12">{post.date.start_date}</h2>
-                  <h3 className="text-lg pl-12">{post.summary}</h3>
+                  <h2 className="text-base pl-12">{post?.date.start_date}</h2>
+                  <h3 className="text-lg pl-12">{post?.summary}</h3>
                   {/* Notion文章主体 */}
                   {post && (<section id="article-wrapper" className="px-1">
                       <NotionPage post={post} />
