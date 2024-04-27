@@ -193,10 +193,17 @@ const LayoutIndex = props => {
 const LayoutPostListIndex = props => {
   // const { customMenu, children, post, allNavPages, categoryOptions, slotLeft, slotRight, slotTop, meta } = props
   // const [filteredNavPages, setFilteredNavPages] = useState(allNavPages)
+
+  //首页构建时，不加入blog列表 20240428 保留原版本
+  // return (
+  //   <>
+ //        <Announcement {...props} />
+ //       // <BlogPostListAll { ...props } />
+ //    </>
+ //  )
   return (
     <>
         <Announcement {...props} />
-        <BlogPostListAll { ...props } />
     </>
   )
 }
