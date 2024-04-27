@@ -59,6 +59,20 @@ const LayoutBase = (props) => {
   const showTocButton = post?.toc?.length > 1
 
   useEffect(() => {
+    const handleContextMenu = (event) => {
+      event.preventDefault(); // 阻止默认的右键菜单行为
+    };
+  
+    // 添加右键点击事件监听器
+    document.addEventListener('contextmenu', handleContextMenu);
+  
+    // 清理函数
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  }, []);
+  
+  useEffect(() => {
     setFilteredNavPages(allNavPages)
   }, [post])
 
