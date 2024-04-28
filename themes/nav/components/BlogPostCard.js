@@ -19,7 +19,7 @@ const BlogPostCard = ({ post, className }) => {
                     {siteConfig('POST_TITLE_ICON') && <NotionIcon icon={pageIcon} size='10' className='text-6xl w-11 h-11 mx-1 my-0 flex-none' />}
                     <div className="stack-comment flex-auto">
                         <p className="title font-bold">{post.title}</p>
-                        <p className="description font-light">{post.date.start_date}</p>
+                        <p className="description font-light">{post.date?.start_date}</p>
                         <p className="description font-normal">{post.summary ? post.summary : '暂无简介'}</p>
                     </div>
                 </div>
