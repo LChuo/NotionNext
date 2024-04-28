@@ -256,9 +256,19 @@ const LayoutSlug = (props) => {
               {!lock && <div id='container'>
 
                   {/* title */}
+                  {console.log('post:', post)}
                   <h1 className="text-3xl pt-4 md:pt-12 dark:text-gray-300">{siteConfig('POST_TITLE_ICON') && <NotionIcon icon={post?.pageIcon} />}{post?.title}</h1>
-                  <h2 className="flex pt-2 pl-12">{post.date?.start_date}</h2>
-                  <h3 className="text-best pt-2 pl-12">{post?.summary}</h3>
+                  {/* 添加post blog 判断语句 仅在blog页面时 显示时间与短评  空集状态下报错回避*/}
+                  {post && post.tags && Array.isArray(post.tags) && post.tags.join(', ') === "blog" ? (
+                    <h2 className="flex pt-2 pl-12">{post.date.start_date}</h2>
+                    ) : null
+                  }
+
+                  {post && post.tags && Array.isArray(post.tags) && post.tags.join(', ') === "blog" ? (
+                    <h3 className="text-best pt-2 pl-12">{post?.summary}</h3>
+                    ) : null
+                  }
+
                   {/* Notion文章主体 */}
                   {post && (<section id="article-wrapper" className="px-1">
                       <NotionPage post={post} />
