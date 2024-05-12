@@ -289,19 +289,10 @@ const LayoutSlug = props => {
   }, [post])
   return (
     <>
-      {/* 文章锁 */}
-      {lock && <ArticleLock validPassword={validPassword} />}
+            {/* 文章锁 */}
+            {lock && <ArticleLock validPassword={validPassword} />}
 
-      {!lock && (
-        <div id='container'>
-          {/* title */}
-          {console.log('post:', post)}
-          <h1 className='text-3xl pt-4 md:pt-12  dark:text-gray-300'>
-            {siteConfig('POST_TITLE_ICON') && (
-              <NotionIcon icon={post?.pageIcon} />
-            )}
-            {post?.title}
-          </h1>
+              {!lock && <div id='container'>
 
                   {/* title */}
                   {console.log('post:', post)}
@@ -320,41 +311,32 @@ const LayoutSlug = props => {
                   {/* Notion文章主体 */}
                   {post && (<section id="article-wrapper" className="px-1">
                       <NotionPage post={post} />
+                      {/* 分享 */}
+                      {/* <ShareBar post={post} /> */}
+                      {/* 文章分类和标签信息 */}
+                      <div className='flex justify-between'>
+                        {CONFIG.POST_DETAIL_CATEGORY && post?.category && (
+                          <CategoryItem category={post.category} />
+                          )}
+                          <div>
+                            {CONFIG.POST_DETAIL_TAG &&
+                            post?.tagItems?.map(tag => (
+                              <TagItemMini key={tag.name} tag={tag} />
+                              ))}
+                          </div>
+                      </div>
+                      {/* 上一篇、下一篇文章 */}
+                      {/* {post?.type === 'Post' && <ArticleAround prev={prev} next={next} />} */}
 
-          {/* Notion文章主体 */}
-          {post && (
-            <section id='article-wrapper' className='px-1'>
-              <NotionPage post={post} />
+                      <AdSlot />
+                      <WWAds className='w-full' orientation='horizontal'/>
 
-              {/* 分享 */}
-              {/* <ShareBar post={post} /> */}
-              {/* 文章分类和标签信息 */}
-              <div className='flex justify-between'>
-                {CONFIG.POST_DETAIL_CATEGORY && post?.category && (
-                  <CategoryItem category={post.category} />
-                )}
-                <div>
-                  {CONFIG.POST_DETAIL_TAG &&
-                    post?.tagItems?.map(tag => (
-                      <TagItemMini key={tag.name} tag={tag} />
-                    ))}
-                </div>
-              </div>
+                      <Comment frontMatter={post} />
+                  </section>)}
 
-              {/* 上一篇、下一篇文章 */}
-              {/* {post?.type === 'Post' && <ArticleAround prev={prev} next={next} />} */}
-
-              <AdSlot />
-              <WWAds className='w-full' orientation='horizontal' />
-
-              <Comment frontMatter={post} />
-            </section>
-          )}
-
-          <TocDrawer {...props} />
-        </div>
-      )}
-    </>
+                <TocDrawer {...props} />
+            </div>}
+        </>
   )
 }
 
@@ -364,7 +346,7 @@ const LayoutSlug = props => {
  * @param {*} props
  * @returns
  */
-const LayoutSearch = props => {
+const LayoutSearch = (props) => {
   return <></>
 }
 
@@ -374,89 +356,73 @@ const LayoutSearch = props => {
  * @param {*} props
  * @returns
  */
-const LayoutArchive = props => {
+const LayoutArchive = (props) => {
   const { archivePosts } = props
-  return (
-    <>
-      <div className='mb-10 pb-20 md:py-12 p-3  min-h-screen w-full'>
-        {Object.keys(archivePosts).map(archiveTitle => (
-          <BlogArchiveItem
-            key={archiveTitle}
-            archiveTitle={archiveTitle}
-            archivePosts={archivePosts}
-          />
-        ))}
-      </div>
-    </>
-  )
+  return (<>
+            <div className="mb-10 pb-20 md:py-12 p-3  min-h-screen w-full">
+                {Object.keys(archivePosts).map(archiveTitle => (
+                    <BlogArchiveItem key={archiveTitle} archiveTitle={archiveTitle} archivePosts={archivePosts} />
+                ))}
+            </div>
+        </>)
 }
 
 /**
  * 404
  */
 const Layout404 = props => {
-  return (
-    <>
-      <div className='w-full h-96 py-80 flex justify-center items-center'>
-        404 Not found.
-      </div>
+  return <>
+        <div className='w-full h-96 py-80 flex justify-center items-center'>404 Not found.</div>
     </>
-  )
 }
 
 /**
  * 分类列表
  */
-const LayoutCategoryIndex = props => {
+const LayoutCategoryIndex = (props) => {
   const { categoryOptions } = props
   const { locale } = useGlobal()
-  return (
-    <>
-      <div className='bg-white dark:bg-gray-700 py-10'>
-        <div className='dark:text-gray-200 mb-5'>
-          <i className='mr-4 fas fa-th' />
-          {locale.COMMON.CATEGORY}:
-        </div>
-        <div id='category-list' className='duration-200 flex flex-wrap'>
-          {categoryOptions?.map(category => {
-            return (
-              <Link
-                key={category.name}
-                href={`/category/${category.name}`}
-                passHref
-                legacyBehavior>
-                <div
-                  className={
-                    'hover:text-black dark:hover:text-white dark:text-gray-300 dark:hover:bg-gray-600 px-5 cursor-pointer py-2 hover:bg-gray-100'
-                  }>
-                  <i className='mr-4 fas fa-folder' />
-                  {category.name}({category.count})
+  return <>
+     <div className='bg-white dark:bg-gray-700 py-10'>
+                <div className='dark:text-gray-200 mb-5'>
+                    <i className='mr-4 fas fa-th' />{locale.COMMON.CATEGORY}:
                 </div>
-              </Link>
-            )
-          })}
-        </div>
-      </div>
-    </>
-  )
+                <div id='category-list' className='duration-200 flex flex-wrap'>
+                    {categoryOptions?.map(category => {
+                      return (
+                            <Link
+                                key={category.name}
+                                href={`/category/${category.name}`}
+                                passHref
+                                legacyBehavior>
+                                <div
+                                    className={'hover:text-black dark:hover:text-white dark:text-gray-300 dark:hover:bg-gray-600 px-5 cursor-pointer py-2 hover:bg-gray-100'}>
+                                    <i className='mr-4 fas fa-folder' />{category.name}({category.count})
+                                </div>
+                            </Link>
+                      )
+                    })}
+                </div>
+            </div>
+  </>
 }
 
 /**
  * 标签列表
  */
-const LayoutTagIndex = props => {
+const LayoutTagIndex = (props) => {
   return <></>
 }
 
 export {
-  Layout404,
-  LayoutArchive,
+  CONFIG as THEME_CONFIG,
   LayoutBase,
-  LayoutCategoryIndex,
   LayoutIndex,
-  LayoutPostList,
   LayoutSearch,
+  LayoutArchive,
   LayoutSlug,
-  LayoutTagIndex,
-  CONFIG as THEME_CONFIG
+  Layout404,
+  LayoutCategoryIndex,
+  LayoutPostList,
+  LayoutTagIndex
 }
