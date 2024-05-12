@@ -20,6 +20,7 @@ const BlogPostCard = ({ post, className }) => {
     post.pageIcon.indexOf('amazonaws.com') !== -1
       ? post.pageIcon + '&width=88'
       : post.pageIcon
+  
   return (
     <Link
       href={post?.href}
@@ -40,7 +41,7 @@ const BlogPostCard = ({ post, className }) => {
             <p className='title font-bold'>{post.title}</p>
             <p className="description font-light">{post.date?.start_date}</p>
             <p className='description font-normal'>
-              {post.summary ? post.summary : ' '}
+              {post.summary ? post.summary : '暂无简介'}
             </p>
           </div>
         </div>

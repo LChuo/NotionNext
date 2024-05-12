@@ -40,20 +40,25 @@ const BlogPostListAll = (props) => {
     const categoryName = item?.category ? item?.category : '' // 将category转换为字符串
     const categoryIcon = filterLinks[categoryName]?.icon ? filterLinks[categoryName]?.icon : '' // 将pageIcon转换为字符串
     let existingGroup = null
-    // 开启自动分组排序
-    if (JSON.parse(siteConfig('NAV_AUTO_SORT', null, CONFIG))) {
-      existingGroup = groups.find(group => group.category === categoryName) // 搜索同名的最后一个分组
-    } else {
-      existingGroup = groups[groups.length - 1] // 获取最后一个分组
-    }
 
-    // 添加数据
-    if (existingGroup && existingGroup.category === categoryName) {
-      existingGroup.items.push(item)
+    // 仅在 post tag 不是blog 时通过处理
+    if (item.tags && Array.isArray(item.tags) && item.tags.join(', ') === "blog") {
+      // console.log(item.tags.join(', '));
     } else {
-      groups.push({ category: categoryName, icon: categoryIcon, items: [item] })
+      // 开启自动分组排序
+      if (JSON.parse(siteConfig('NAV_AUTO_SORT', null, CONFIG))) {
+        existingGroup = groups.find(group => group.category === categoryName) // 搜索同名的最后一个分组
+      } else {
+        existingGroup = groups[groups.length - 1] // 获取最后一个分组
+      }
+      // 添加数据
+      if (existingGroup && existingGroup.category === categoryName) {
+        existingGroup.items.push(item)
+      } else {
+        groups.push({ category: categoryName, icon: categoryIcon, items: [item] })
+      }
     }
-    return groups
+      return groups
   }, [])
 
   // 处理是否选中
