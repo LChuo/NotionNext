@@ -1565,6 +1565,16 @@ code[class*='language-'] {
   max-width: 100% !important;
 }
 
+img{
+  /* SPの長押し禁止 */
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -moz-touch-callout:none;
+  -moz-user-select:none;
+  user-select:none;
+}
+
+
 @media only screen and (max-width: 730px) {
   .notion-page {
     padding-left: 2vw;
