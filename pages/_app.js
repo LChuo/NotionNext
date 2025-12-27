@@ -10,7 +10,7 @@ import useAdjustStyle from '@/hooks/useAdjustStyle'
 import { GlobalContextProvider } from '@/lib/global'
 import { getBaseLayoutByTheme } from '@/themes/theme'
 import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useEffect } from 'react'
 import { getQueryParam } from '../lib/utils'
 
 // 各种扩展插件 这个要阻塞引入
@@ -34,6 +34,20 @@ const MyApp = ({ Component, pageProps }) => {
   useAdjustStyle()
 
   const route = useRouter()
+  //【这里开始：滚动重置逻辑】
+  useEffect(() => {
+  const handleRouteChange = () => {
+    window.scrollTo(0, 0)
+  }
+
+  route.events.on('routeChangeComplete', handleRouteChange)
+
+  return () => {
+    route.events.off('routeChangeComplete', handleRouteChange)
+  }
+}, [route.events])
+// 【这里结束】
+  
   const theme = useMemo(() => {
     return (
       getQueryParam(route.asPath, 'theme') ||
