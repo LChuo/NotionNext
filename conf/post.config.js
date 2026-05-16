@@ -13,7 +13,7 @@ module.exports = {
     process.env.NEXT_PUBLIC_NOTION_SCHEDULE_PUBLISH || true, // 按照文章的发布时间字段，控制自动上下架
 
   // 分享条
-  POST_SHARE_BAR_ENABLE: process.env.NEXT_PUBLIC_POST_SHARE_BAR || 'true', //文章底部分享条开关
+  POST_SHARE_BAR_ENABLE: process.env.NEXT_PUBLIC_POST_SHARE_BAR || 'false', //文章底部分享条开关
   POSTS_SHARE_SERVICES:
     process.env.NEXT_PUBLIC_POST_SHARE_SERVICES ||
     'link,wechat,qq,weibo,email,facebook,twitter,telegram,messenger,line,reddit,whatsapp,linkedin,csdn,juejin', // 分享的服務，按顺序显示,逗号隔开
@@ -35,9 +35,9 @@ module.exports = {
     process.env.NEXT_PUBLIC_ARTICLE_EXPIRATION_DAYS || 90, // 文章过期提醒阈值（天）
   ARTICLE_EXPIRATION_MESSAGE:
     process.env.NEXT_PUBLIC_ARTICLE_EXPIRATION_MESSAGE ||
-    '这篇文章发布于 %%DAYS%% 天前，内容可能已过时，请谨慎参考。', // 过期提示信息，使用 %%DAYS%% 作为天数占位符
+    '这篇口嗨发布于 %%DAYS%% 天前，角色/CP解读可能已改变。', // 过期提示信息，使用 %%DAYS%% 作为天数占位符
   ARTICLE_EXPIRATION_ENABLED:
-    process.env.NEXT_PUBLIC_ARTICLE_EXPIRATION_ENABLED || 'false', // 是否启用文章过期提醒
+    process.env.NEXT_PUBLIC_ARTICLE_EXPIRATION_ENABLED || 'true', // 是否启用文章过期提醒
 
   POST_WAITING_TIME_FOR_404:
     process.env.NEXT_PUBLIC_POST_WAITING_TIME_FOR_404 || '8', // 文章加载超时时间，单位秒；超时后跳转到404页面
