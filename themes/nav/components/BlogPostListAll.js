@@ -36,7 +36,9 @@ const BlogPostListAll = (props) => {
   })
 
   const selectedSth = false
-  const groupedArray = filteredNavPages?.reduce((groups, item) => {
+  
+  const homeFilteredPages = filteredNavPages?.filter(item => item?.category !== '不推荐阅读')  // 首页隐藏指定 category
+  const groupedArray = homeFilteredPages?.reduce((groups, item) => {
     const categoryName = item?.category ? item?.category : '' // 将category转换为字符串
     const categoryIcon = filterLinks[categoryName]?.icon ? filterLinks[categoryName]?.icon : '' // 将pageIcon转换为字符串
     let existingGroup = null
