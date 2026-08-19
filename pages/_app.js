@@ -43,6 +43,21 @@ const MyApp = ({ Component, pageProps }) => {
   useAdjustStyle()
 
   const route = useRouter()
+   //【从这里开始】滚动逻辑重置
+  useEffect(() => {
+  const handleRouteChange = () => {
+    const el = document.getElementById('center-wrapper')
+    if (el) {
+      el.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+  }
+
+  route.events.on('routeChangeComplete', handleRouteChange)
+  return () => {
+    route.events.off('routeChangeComplete', handleRouteChange)
+  }
+}, [route.events])
+  //【这里结束】
   const queryTheme = getQueryParam(route.asPath, 'theme')
   const notionTheme = pageProps?.NOTION_CONFIG?.THEME
   const configTheme = BLOG.THEME
