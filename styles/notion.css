@@ -1631,13 +1631,14 @@ code[class*='language-'] {
 }
 
 img{
-  /* 禁止长按保存 */
+  /* SPの長押し禁止 */
   -webkit-touch-callout:none;
   -webkit-user-select:none;
   -moz-touch-callout:none;
   -moz-user-select:none;
   user-select:none;
 }
+
 
 @media only screen and (max-width: 730px) {
   .notion-page {

@@ -38,8 +38,9 @@ const BlogPostCard = ({ post, className }) => {
           )}
           <div className='stack-comment flex-auto'>
             <p className='title font-bold'>{post.title}</p>
+            <p className="description font-light">{post.date?.start_date}</p>
             <p className='description font-normal'>
-              {post.summary ? post.summary : '暂无简介'}
+              {post.summary ? post.summary : ' '}
             </p>
           </div>
         </div>

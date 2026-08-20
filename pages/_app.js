@@ -10,7 +10,7 @@ import useAdjustStyle from '@/hooks/useAdjustStyle'
 import { GlobalContextProvider } from '@/lib/global'
 import { getBaseLayoutByTheme } from '@/themes/theme'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useMemo, useEffect } from 'react'
 import { getQueryParam } from '../lib/utils'
 import ErrorHandler from '@/lib/utils/errorHandler'
 
@@ -43,7 +43,7 @@ const MyApp = ({ Component, pageProps }) => {
   useAdjustStyle()
 
   const route = useRouter()
-   //【从这里开始】滚动逻辑重置
+  //【从这里开始】滚动逻辑重置
   useEffect(() => {
   const handleRouteChange = () => {
     const el = document.getElementById('center-wrapper')
@@ -58,9 +58,6 @@ const MyApp = ({ Component, pageProps }) => {
   }
 }, [route.events])
   //【这里结束】
-  const queryTheme = getQueryParam(route.asPath, 'theme')
-  const notionTheme = pageProps?.NOTION_CONFIG?.THEME
-  const configTheme = BLOG.THEME
   const theme = useMemo(() => {
     return queryTheme || notionTheme || configTheme
   }, [queryTheme, notionTheme, configTheme])
