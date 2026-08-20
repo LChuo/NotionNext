@@ -325,13 +325,13 @@ const LayoutSlug = props => {
             {post?.title}
           </h1>
 
-       {/* 添加post category 判断语句 仅在【不推荐阅读】页面时 显示时间与短评  空集状态下报错回避*/}
-                  {post && post.category && Array.isArray(post.category) && post.category.join(', ') === "不推荐阅读" ? (
+       {/* 添加post blog 判断语句 仅在blog页面时 显示时间与短评  空集状态下报错回避*/}
+                  {post && post.tags && Array.isArray(post.tags) && post.tags.join(', ') === "blog" ? (
                     <h2 className="flex pt-2 pl-12">{post.date.start_date}</h2>
                     ) : null
                   }
 
-                  {post && post.category && Array.isArray(post.category) && post.category.join(', ') === "不推荐阅读" ? (
+                  {post && post.tags && Array.isArray(post.tags) && post.tags.join(', ') === "blog" ? (
                     <h3 className="text-best pt-2 pl-12">{post?.summary}</h3>
                     ) : null
                   }
