@@ -770,11 +770,21 @@ svg.notion-page-icon {
 }
 
 .notion-asset-wrapper img {
+  border-radius: 3%;
   /* width: 90%; */
   /* height: 100%; */
   height: auto !important;
   max-height: 100%;
   margin: auto;
+}
+
+img{
+  /* 禁止长按保存 */
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -moz-touch-callout:none;
+  -moz-user-select:none;
+  user-select:none;
 }
 
 .notion-asset-wrapper iframe {
